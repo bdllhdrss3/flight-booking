@@ -1,0 +1,411 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Fly Bazzar site</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" >
+
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}" >
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}" >
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/jquery.timepicker.css' %}" >
+
+    
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+  </head>
+  <body>
+    
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html"><img style="width:250px; " src="{% static 'images/logo1.png' %}" alt="FLIGHT BAZZAR"></a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Hotels</a></li>
+			  <li id="dropdown" class="nav-item"><a href="#" class="nav-link">Rental</a>
+			 	 <ul id="dropdown-content">
+					<li><a class="nav-item" href="#">Train</a></li>
+					<li><a class="nav-item" href="#">Bus</a></li>
+			 	 </ul>
+				</li>
+			  <li class="nav-item"><a href="#" class="nav-link">Places</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    
+    <div class="hero-wrap js-fullheight" style="background-image: url('{% static "images/bg_1.jpg" %}');">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+          <div class="col-md-9 ftco-animate mb-5 pb-5 text-center text-md-left" data-scrollax=" properties: { translateY: '70%' }">
+            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> <br>Let's Go Safe </h1>
+            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit with Fly Bazzar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section justify-content-end ftco-search">
+		
+    	<div class="container-wrap ml-auto">
+    		<div class="row no-gutters">
+          <div class="col-md-12 nav-link-wrap">
+            <div class="nav nav-pills justify-content-center text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Flight</a>
+
+              <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Hotel</a>
+
+              <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Car Rent</a>
+
+            </div>
+          </div>
+          <div class="col-md-12 tab-wrap">
+            
+            <div class="tab-content p-4 px-5" id="v-pills-tabContent">
+
+              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+           
+					<!-- Tab links -->
+	<div class="tab">
+		<button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Book flight</button>
+  	</div>
+  
+  <!-- Tab content -->
+
+  <div id="London" class="tabcontent">
+	{% if errors %}
+	<div class="alert alert-danger">
+		<strong>Error:</strong>
+		{% for field, errors in errors.items %}
+			{{ field }}: {{ errors|join:", " }}
+		{% endfor %}
+	</div>
+  {% endif %}
+	{% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button> {% endcomment %}
+
+	<form action="#" method="POST" class="search-destination">
+		<div class="row">
+			{% csrf_token %}
+			<div class="col-md align-items-end">
+				<div class="form-group">
+					<label for="{{ form.from_location.id_for_label }}">From</label>
+					<div class="form-field">
+					  <div class="icon"><span class="icon-my_location"></span></div>
+					  {{ form.from_location }}
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md align-items-end">
+				<div class="form-group">
+					<label for="{{ form.to_location.id_for_label }}">To</label>
+					<div class="form-field">
+						<div class="icon"><span class="icon-map-marker"></span></div>
+						{{ form.to_location}}
+					</div>
+				</div>
+			</div>
+			<div class="col-md align-items-end">
+				<div class="form-group">
+					<label for="{{ form.departure_date.id_for_label }}">Departure</label>
+					<div class="form-field">
+						<div class="select-wrap">
+							<div class="icon"><span class="icon-map-marker"></span></div>
+							{{ form.departure_date}}
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md align-items-end">
+				<div class="form-group">
+					<label for="{{ form.return_date.id_for_label }}">Return</label>
+					<div class="form-field">
+						<div class="icon"><span class="icon-map-marker"></span></div>
+						{{ form.return_date}}
+					</div>
+				</div>
+			</div>
+			<div class="col-md align-items-end">
+				<div class="form-group">
+					<label for="{{ form.adults.id_for_label }}">Adult</label>
+					<div class="form-field">
+						<div class="select-wrap">
+							<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+							{{ form.adults}}
+						</div>
+				  	</div>
+					
+				</div>
+			</div>
+
+
+			<div class="col-md align-items-end">
+			  <div class="form-group">
+				<label for="{{ form.kids.id_for_label }}">Kids</label>
+				  <div class="form-field">
+					<div class="select-wrap">
+				    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+					{{ form.kids}}		  
+				</div>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="col-md align-items-end">
+			  <div class="form-group">
+				<label for="{{ form.flight_class.id_for_label }}">Class</label>
+				  <div class="form-field">
+					<div class="select-wrap">
+						<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+						{{ form.flight_class}}
+					</div>
+				  </div>
+			  </div>
+		  </div>
+
+
+
+			<div class="col-md align-self-end">
+				<div class="form-group">
+					<div class="form-field">
+					  <input type="submit" value="Search" class="form-control btn btn-primary">
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+  </div>
+		
+    </div>
+              <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
+              	<form action="#" class="search-destination">
+              		<div class="row">
+              			<div class="col-md align-items-end">
+              				<div class="form-group">
+              					<label for="#">Fron</label>
+              					<div class="form-field">
+	              					<div class="icon"><span class="icon-map-marker"></span></div>
+					                <input type="text" class="form-control checkin_date" placeholder="From">
+					              </div>
+				              </div>
+              			</div>
+              			<div class="col-md align-items-end">
+              				<div class="form-group">
+              					<label for="#">Check Out</label>
+              					<div class="form-field">
+	              					<div class="icon"><span class="icon-map-marker"></span></div>
+					                <input type="text" class="form-control checkout_date" placeholder="From">
+					              </div>
+				              </div>
+              			</div>
+              			<div class="col-md align-items-end">
+              				<div class="form-group">
+              					<label for="#">Guest</label>
+              					<div class="form-field">
+	              					<div class="select-wrap">
+			                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+			                      <select name="" id="" class="form-control">
+			                      	<option value="">1</option>
+			                        <option value="">2</option>
+			                        <option value="">3</option>
+			                        <option value="">4</option>
+			                        <option value="">5</option>
+			                      </select>
+			                    </div>
+					              </div>
+				              </div>
+              			</div>
+              			<div class="col-md align-self-end">
+              				<div class="form-group">
+              					<div class="form-field">
+					                <input type="submit" value="Search" class="form-control btn btn-primary">
+					              </div>
+				              </div>
+              			</div>
+              		</div>
+              	</form>
+              </div>
+
+              <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-effect-tab">
+              	<form action="#" class="search-destination">
+              		<div class="row">
+              			<div class="col-md align-items-end">
+              				<div class="form-group">
+              					<label for="#">Where</label>
+              					<div class="form-field">
+	              					<div class="icon"><span class="icon-map-marker"></span></div>
+					                <input type="text" class="form-control" placeholder="Where">
+					              </div>
+				              </div>
+              			</div>
+              			<div class="col-md align-items-end">
+              				<div class="form-group">
+              					<label for="#">Check In</label>
+              					<div class="form-field">
+	              					<div class="icon"><span class="icon-map-marker"></span></div>
+					                <input type="text" class="form-control checkin_date" placeholder="Check In">
+					              </div>
+				              </div>
+              			</div>
+              			<div class="col-md align-items-end">
+              				<div class="form-group">
+              					<label for="#">Check Out</label>
+              					<div class="form-field">
+	              					<div class="icon"><span class="icon-map-marker"></span></div>
+					                <input type="text" class="form-control checkout_date" placeholder="From">
+					              </div>
+				              </div>
+              			</div>
+              			<div class="col-md align-self-end">
+              				<div class="form-group">
+              					<div class="form-field">
+					                <input type="submit" value="Search" class="form-control btn btn-primary">
+					              </div>
+				              </div>
+              			</div>
+              		</div>
+              	</form>
+              </div>
+            </div>
+          </div>
+        </div>
+    	</div>
+    </section>
+	<!-- response section -->
+	<div class="mx-5 justify-content-center">
+		{% if response %}
+			<div class="d-flex flex-wrap">
+			{% for offer in response %}
+				<div class="card mb-4 mx-4">
+				<div class="card-body">
+				  <h5 class="card-title">From: {{ offer.itineraries.0.segments.0.departure.iataCode }} To: {{ offer.itineraries.0.segments.1.arrival.iataCode }}</h5>
+				  <p class="card-text">Departure: {{ offer.itineraries.0.segments.0.departure.at}} </p>
+				  <p class="card-text">Arrival: {{ offer.itineraries.0.segments.1.arrival.at }}</p>
+				  <p class="card-text">Duration: {{ offer.itineraries.0.duration }}</p>
+				  <h6 class="card-subtitle mb-2 text-muted">Itineraries</h6>
+				  {% for itinerary in offer.itineraries %}
+					<h6 class="card-subtitle mb-2 text-muted">{{ itinerary.segments.0.departure.at|date:"D, d M Y, H:i" }} → {{ itinerary.segments.1.arrival.at|date:"D, d M Y, H:i" }}</h6>
+					<ul>
+					  {% for segment in itinerary.segments %}
+						<li>{{ segment.marketingCarrier.code }}  {{ segment.departure.iataCode }} → {{ segment.arrival.iataCode }} ({{ segment.duration }})</li>
+					  {% endfor %}
+					</ul>
+				  {% endfor %}
+				  <p href="#" class=" mt-3">Price: {{ offer.price.grandTotal }} {{ offer.price.currency }}</a>
+				  <p class="card-text"><small class="text-muted">{{ offer.carrierCode }}{% if offer.oneWay %} (One way){% endif %}</small></p>
+				</div>
+				<div class="col-md-4 mx-5 mb-3">
+					<form method="post" action="{% url 'book_flight' %}">
+						{% csrf_token %}
+						<input type="hidden" name="flight" value="{{ offer }}">
+						<button type="submit" class="btn btn-primary">Book Now</button>
+					</form>
+				</div>
+			  </div>
+			  
+				{% empty %}
+				<p>No flights found</p>
+			{% endfor %}
+
+		  </div>
+		{% endif %}
+		{% if not response %}
+		  <p>No flights found </p>
+		{% endif %}
+		</div>
+
+   <!-- login model--> 
+   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Your login form goes here -->
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!-- end login model--> 
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+  <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'js/google-map.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+	$(document).ready(function() {
+		$("#id_to_location").autocomplete({
+		  source: "autocomplete",
+		  minLength: 2
+		});
+		$("#id_from_location").autocomplete({
+			source: "autocomplete",
+			minLength: 2
+		  });
+	  });
+	  
+  </script>
+
+
+    
+  </body>
+</html>
